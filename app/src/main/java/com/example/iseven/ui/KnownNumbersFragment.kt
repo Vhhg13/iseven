@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.iseven.data.model.KnownListItem
 import com.example.iseven.databinding.FragmentKnownNumbersBinding
 import com.example.iseven.util.KnownListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class KnownNumbersFragment : Fragment(), KnownListAdapter.KnownNumberPressedListener {
     private lateinit var binding: FragmentKnownNumbersBinding
-    val viewModel: KnownNumbersFragmentViewModel by viewModels { KnownNumbersFragmentViewModel.Factory }
-//    private lateinit var adapter: ListAdapter<KnownListItem, KnownListAdapter.KnownViewHolder>
+    private val viewModel: KnownNumbersFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +33,6 @@ class KnownNumbersFragment : Fragment(), KnownListAdapter.KnownNumberPressedList
         viewModel.uiState.observe(viewLifecycleOwner){
             adapter.submitList(it)
         }
-        //adapter.submitList(listOf(KnownListItem(12, true), KnownListItem(13, false)))
         binding.recycler.layoutManager = LinearLayoutManager(activity)
         binding.recycler.adapter = adapter
     }
@@ -43,7 +43,5 @@ class KnownNumbersFragment : Fragment(), KnownListAdapter.KnownNumberPressedList
         navController.navigate(action)
     }
 
-    override fun removeItem(item: KnownListItem) {
-        viewModel.remove(item)
-    }
+    override fun removeItem(item: KnownListItem) = viewModel.remove(item)
 }

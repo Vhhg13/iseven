@@ -9,10 +9,12 @@ import androidx.fragment.app.viewModels
 import com.example.iseven.R
 import com.example.iseven.databinding.FragmentViewKnownNumberBinding
 import com.example.iseven.util.AdFormatter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ViewKnownNumberFragment : Fragment() {
     private lateinit var binding: FragmentViewKnownNumberBinding
-    private val viewModel: ViewKnownNumberFragmentViewModel by viewModels{ ViewKnownNumberFragmentViewModel.Factory }
+    private val viewModel: ViewKnownNumberFragmentViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -13,18 +13,18 @@ import androidx.navigation.findNavController
 import com.example.iseven.R
 import com.example.iseven.databinding.FragmentCheckBinding
 import com.example.iseven.util.AdFormatter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CheckFragment : Fragment() {
 
     private lateinit var binding: FragmentCheckBinding
-    val viewModel: CheckFragmentViewModel by viewModels { CheckFragmentViewModel.Factory }
+    private val viewModel: CheckFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        // inflater.inflate(R.layout.fragment_check, container, false)
         binding = FragmentCheckBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -39,14 +39,15 @@ class CheckFragment : Fragment() {
         binding.seeKnown.setOnClickListener {
             navController.navigate(R.id.action_checkFragment_to_knownNumbersFragment)
         }
-        viewModel.uiState.observe(viewLifecycleOwner){
-            binding.result.text = if(it.isEven) "Четное" else "Нечётное"
-
-            binding.ad.text = AdFormatter.format(it.ad)
-        }
         binding.numberToBeChecked.setOnEditorActionListener { _, _, _ ->
             viewModel.check(binding.numberToBeChecked.text.toString().toInt())
             requireActivity().getSystemService(InputMethodManager::class.java).hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        }
+
+
+        viewModel.uiState.observe(viewLifecycleOwner){
+            binding.result.text = if(it.isEven) "Четное" else "Нечётное"
+            binding.ad.text = AdFormatter.format(it.ad)
         }
     }
 }
