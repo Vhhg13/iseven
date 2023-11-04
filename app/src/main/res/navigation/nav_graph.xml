@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/checkFragment">
+
+    <fragment
+        android:id="@+id/checkFragment"
+        android:name="com.example.iseven.ui.CheckFragment"
+        android:label="fragment_check"
+        tools:layout="@layout/fragment_check" >
+        <action
+            android:id="@+id/action_checkFragment_to_knownNumbersFragment"
+            app:destination="@id/knownNumbersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/knownNumbersFragment"
+        android:name="com.example.iseven.ui.KnownNumbersFragment"
+        android:label="fragment_known_numbers"
+        tools:layout="@layout/fragment_known_numbers" >
+        <action
+            android:id="@+id/action_knownNumbersFragment_to_viewKnownNumberFragment"
+            app:destination="@id/viewKnownNumberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewKnownNumberFragment"
+        android:name="com.example.iseven.ui.ViewKnownNumberFragment"
+        android:label="fragment_view_known_number"
+        tools:layout="@layout/fragment_view_known_number" >
+        <argument
+            android:name="number"
+            app:argType="com.example.iseven.data.model.KnownListItem" />
+    </fragment>
+</navigation>

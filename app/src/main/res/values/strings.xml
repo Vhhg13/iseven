@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">IsEven</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="check_evenness">Проверить на чётность</string>
+    <string name="hint">Введите число</string>
+    <string name="placeholder_number">520</string>
+    <string name="placeholder_ad">Buy isEvenCoin, the hottest new cryptocurrency!</string>
+    <string name="even">Чётное</string>
+    <string name="odd">Нечётное</string>
+    <string name="see_known">К известным</string>
+</resources>
