@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.iseven.R
+import com.example.iseven.data.model.KnownListItem
 import com.example.iseven.databinding.FragmentViewKnownNumberBinding
+import com.example.iseven.ui.viewmodels.ViewKnownNumberFragmentViewModel
 import com.example.iseven.util.AdFormatter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +32,11 @@ class ViewKnownNumberFragment : Fragment() {
             binding.parity.text = resources.getString(if(it.isEven) R.string.even else R.string.odd)
             binding.ad.text = AdFormatter.format(it.ad)
         }
-        viewModel.check(ViewKnownNumberFragmentArgs.fromBundle(requireArguments()).number.number)
+        val number = arguments?.getInt("int", -1)!!
+        println(number)
+        if(number == -1)
+            viewModel.check(ViewKnownNumberFragmentArgs.fromBundle(requireArguments()).number.number)
+        else
+            viewModel.check(number)
     }
 }

@@ -9,4 +9,7 @@
     <string name="even">Чётное</string>
     <string name="odd">Нечётное</string>
     <string name="see_known">К известным</string>
+    <string name="title_activity_compose">ComposeActivity</string>
+    <string name="search">Скачать</string>
+    <string name="image">image</string>
 </resources>

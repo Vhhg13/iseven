@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
+import com.example.iseven.MainActivity
 import com.example.iseven.data.model.KnownListItem
 import com.example.iseven.databinding.FragmentKnownNumbersBinding
+import com.example.iseven.ui.viewmodels.KnownNumbersFragmentViewModel
 import com.example.iseven.util.KnownListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,9 +39,14 @@ class KnownNumbersFragment : Fragment(), KnownListAdapter.KnownNumberPressedList
     }
 
     override fun onItemClick(item: KnownListItem) {
-        val navController = findNavController()
-        val action = KnownNumbersFragmentDirections.actionKnownNumbersFragmentToViewKnownNumberFragment(item)
-        navController.navigate(action)
+        if(!(activity as MainActivity).toViewKnownNumber(item)) {
+            val navController = findNavController()
+            val action =
+                KnownNumbersFragmentDirections.actionKnownNumbersFragmentToViewKnownNumberFragment(
+                    item
+                )
+            navController.navigate(action)
+        }
     }
 
     override fun removeItem(item: KnownListItem) = viewModel.remove(item)

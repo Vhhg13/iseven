@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/checkFragment">
+    app:startDestination="@id/imageFragment">
 
     <fragment
         android:id="@+id/checkFragment"
@@ -32,4 +32,8 @@
             android:name="number"
             app:argType="com.example.iseven.data.model.KnownListItem" />
     </fragment>
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="com.example.iseven.ui.ImageFragment"
+        android:label="ImageFragment" />
 </navigation>

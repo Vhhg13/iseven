@@ -1,5 +1,6 @@
 package com.example.iseven.di
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.iseven.data.datasrc.local.KnownNumbersDB
@@ -7,6 +8,7 @@ import com.example.iseven.data.datasrc.local.KnownNumbersDataSource
 import com.example.iseven.data.datasrc.remote.EvennessDataSource
 import com.example.iseven.data.datasrc.remote.IsEvenAPI
 import com.example.iseven.data.repo.EvennessRepository
+import com.example.iseven.data.repo.ImageRepository
 import com.example.iseven.data.repo.KnownNumbersRepository
 import dagger.Module
 import dagger.Provides
@@ -58,4 +60,8 @@ object DIModule {
             .build()
         return retrofit.create(IsEvenAPI::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideImageRepo(app: Application) = ImageRepository(app)
 }
