@@ -2,6 +2,7 @@ package com.example.iseven.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.iseven.data.model.Evenness
@@ -11,12 +12,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewKnownNumberFragmentViewModel @Inject constructor(private val repo: KnownNumbersRepository): ViewModel() {
+class ViewKnownNumberFragmentViewModel @Inject constructor(private val repo: KnownNumbersRepository, private val savedStateHandle: SavedStateHandle): ViewModel() {
 
     private val _uiState = MutableLiveData<Evenness>()
     val uiState = _uiState as LiveData<Evenness>
-    fun check(n: Int) =
-        viewModelScope.launch {
-            _uiState.value = repo.check(n)
-        }
+    init {
+        viewModelScope.launch { savedStateHandle.get<Int>("n")?.let { _uiState.value = repo.check(it) } }
+    }
 }
