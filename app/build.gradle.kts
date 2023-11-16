@@ -91,6 +91,8 @@ dependencies {
 
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation("androidx.hilt:hilt-work:1.0.0")
 
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
