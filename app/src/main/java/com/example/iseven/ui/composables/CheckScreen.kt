@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -19,9 +20,12 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.LifecycleOwner
@@ -29,6 +33,7 @@ import com.example.iseven.R
 import com.example.iseven.data.model.Evenness
 import com.example.iseven.ui.viewmodels.CheckFragmentViewModel
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CheckScreen(
     viewModel: CheckFragmentViewModel = hiltViewModel(),
@@ -39,6 +44,7 @@ fun CheckScreen(
     var evenness by rememberSaveable {
         mutableStateOf(R.string.empty)
     }
+    val kbdController = LocalSoftwareKeyboardController.current
     LaunchedEffect(key1 = true){
         viewModel.uiState.observe(lifecycleOwner){
             number = it.number.toString()
@@ -51,13 +57,29 @@ fun CheckScreen(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        TextField(value = number, onValueChange = { number = it }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
+        TextField(
+            value = number,
+            onValueChange = { number = it },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(onDone = {
+                kbdController?.hide()
+                try {
+                    viewModel.check(number.toInt())
+                }catch(_: NumberFormatException){}
+            })
+        )
         Button(onClick = {
-            viewModel.check(number.toInt())
+            try {
+                viewModel.check(number.toInt())
+            }catch(_: NumberFormatException){}
         }) {
             Text(text = stringResource(id = R.string.check_evenness))
         }
         Text(text = stringResource(evenness))
         Text(text = ad)
     }
+
 }

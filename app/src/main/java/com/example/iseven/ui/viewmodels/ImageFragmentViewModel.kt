@@ -36,6 +36,7 @@ class ImageFragmentViewModel @Inject constructor(private val imageRepo: ImageRep
             val bitmap = imageRepo.loadImage(url)
             if(bitmap != null)
                 _uiState.postValue(bitmap!!)
+
         }
     }
 
@@ -48,6 +49,7 @@ class ImageFragmentViewModel @Inject constructor(private val imageRepo: ImageRep
             imageRepo.saveImage(bitmap)
         }
     }
+
 
     fun clearImages(){
         viewModelScope.launch {
