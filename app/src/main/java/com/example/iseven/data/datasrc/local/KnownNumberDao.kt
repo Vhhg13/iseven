@@ -1,22 +1,21 @@
 package com.example.iseven.data.datasrc.local
 
 import androidx.room.Dao
-import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Upsert
-import com.example.iseven.data.model.KnownNumberEntity
+import com.example.iseven.data.model.Evenness
 
 
 @Dao
 interface KnownNumberDao {
     @Upsert
-    suspend fun saveNumber(entity: KnownNumberEntity)
+    suspend fun saveNumber(entity: Evenness)
 
     @Query("SELECT * FROM known_numbers ORDER BY number ASC")
-    suspend fun getAll(): List<KnownNumberEntity>
+    suspend fun getAll(): List<Evenness>
 
     @Query("SELECT * FROM known_numbers WHERE number=:n LIMIT 1")
-    suspend fun check(n: Int): KnownNumberEntity
+    suspend fun check(n: Int): Evenness?
 
     @Query("DELETE FROM known_numbers WHERE number=:n")
     suspend fun remove(n: Int)

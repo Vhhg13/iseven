@@ -14,12 +14,13 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.URL
+import javax.inject.Inject
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectory
 import kotlin.io.path.createFile
 import kotlin.io.path.exists
 
-class ImageRepository(private val applicationContext: Application) {
+class ImageRepository @Inject constructor(private val applicationContext: Application) {
     private val sp = applicationContext.getSharedPreferences("lastImageIndex", Context.MODE_PRIVATE)
     private var imageCount: Int = sp.getInt("index", 0)
 

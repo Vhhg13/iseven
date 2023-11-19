@@ -18,11 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.iseven.R
-import com.example.iseven.data.model.KnownListItem
 import androidx.compose.material3.Icon
+import com.example.iseven.data.model.Evenness
 
 @Composable
-fun ListItemComposable(uiState: KnownListItem, seeNumber: () -> Unit, deleteNumber: () -> Unit){
+fun ListItemComposable(uiState: Evenness, seeNumber: () -> Unit, deleteNumber: () -> Unit){
     Box(modifier = Modifier.padding(start = 10.dp)) {
         Column(modifier = Modifier
             .clickable { seeNumber() }
@@ -30,7 +30,7 @@ fun ListItemComposable(uiState: KnownListItem, seeNumber: () -> Unit, deleteNumb
             .padding(15.dp)
             .align(Alignment.CenterStart)) {
             Text(text = uiState.number.toString(), fontSize = 25.sp, fontWeight = FontWeight.Bold)
-            Text(text = stringResource(id = if(uiState.parity) R.string.even else R.string.odd), fontSize = 15.sp)
+            Text(text = stringResource(id = if(uiState.isEven) R.string.even else R.string.odd), fontSize = 15.sp)
         }
         IconButton(onClick = deleteNumber, Modifier.padding(end = 15.dp).align(Alignment.CenterEnd).clickable { deleteNumber() }) {
             Icon(imageVector = Icons.Filled.Delete, contentDescription = null, Modifier.size(35.dp))

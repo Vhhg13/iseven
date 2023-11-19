@@ -1,7 +1,5 @@
 package com.example.iseven
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -35,16 +33,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.app.ActivityCompat
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequest
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import com.example.iseven.ui.composables.CheckScreen
 import com.example.iseven.ui.composables.ImageScreen
 import com.example.iseven.ui.composables.KnownNumberScreen
@@ -53,7 +46,6 @@ import com.example.iseven.ui.ui.theme.IsEvenTheme
 import com.example.iseven.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 
 
 @AndroidEntryPoint
@@ -180,9 +172,7 @@ class MainActivity : AppCompatActivity() {
                                 })
                             }
                             composable(Routes.IMAGE){
-                                BackHandler(true) {
-
-                                }
+                                BackHandler(true) {}
                                 ImageScreen()
                             }
 

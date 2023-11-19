@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.LifecycleOwner
-import com.example.iseven.data.model.KnownListItem
+import com.example.iseven.data.model.Evenness
 import com.example.iseven.ui.viewmodels.KnownNumbersFragmentViewModel
 
 @Composable
@@ -26,7 +26,7 @@ fun KnownNumberScreen(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
 ) {
     var items by remember {
-        mutableStateOf(listOf<KnownListItem>())
+        mutableStateOf(listOf<Evenness>())
     }
     LaunchedEffect(key1 = true){
         viewModel.uiState.observe(lifecycleOwner){

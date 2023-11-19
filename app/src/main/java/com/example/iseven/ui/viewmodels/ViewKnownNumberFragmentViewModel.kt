@@ -6,17 +6,17 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.iseven.data.model.Evenness
-import com.example.iseven.data.repo.KnownNumbersRepository
+import com.example.iseven.data.repo.EvennessRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewKnownNumberFragmentViewModel @Inject constructor(private val repo: KnownNumbersRepository, private val savedStateHandle: SavedStateHandle): ViewModel() {
+class ViewKnownNumberFragmentViewModel @Inject constructor(private val repo: EvennessRepository, private val savedStateHandle: SavedStateHandle): ViewModel() {
 
     private val _uiState = MutableLiveData<Evenness>()
     val uiState = _uiState as LiveData<Evenness>
     init {
-        viewModelScope.launch { savedStateHandle.get<Int>("n")?.let { _uiState.value = repo.check(it) } }
+        viewModelScope.launch { savedStateHandle.get<Int>("n")?.let { _uiState.postValue(repo.isEven(it)) } }
     }
 }

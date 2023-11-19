@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.Button
-import androidx.compose.material.TextField
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -65,8 +65,9 @@ fun ImageScreen(
                 top.linkTo(parent.top)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
-            }.clickable {
-                        viewModel.clearImages()
+            }
+            .clickable {
+                viewModel.clearImages()
             },
             horizontalArrangement = Arrangement.Start
         ){
@@ -76,7 +77,7 @@ fun ImageScreen(
         }
 
 
-        TextField(value = link, onValueChange = { link = it }, modifier = Modifier.constrainAs(linkField){
+        OutlinedTextField(value = link, onValueChange = { link = it }, modifier = Modifier.constrainAs(linkField){
             top.linkTo(lst.bottom)
             start.linkTo(parent.start)
             end.linkTo(parent.end)

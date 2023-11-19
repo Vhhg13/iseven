@@ -39,6 +39,7 @@ fun SeeNumberScreen(
         viewModel.uiState.observe(lifecycleOwner){
             text = it.number.toString()
             ad = it.ad
+            even = it.isEven
         }
     }
     Column(verticalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxSize()) {
