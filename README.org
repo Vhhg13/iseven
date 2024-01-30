@@ -1,0 +1,21 @@
+* About the project
+
+This piece of software is made as a school project for the discipline "Mobile App Development in Kotlin".
+
+During the development process the following technologies were used:
+- Android Architecture Components
+  - ViewModel
+  - LiveData
+  - Room
+- UI with Jetpack compose
+- Compose navigation
+- Fragments
+  - Manual navigation
+  - Navigation with NavigationAPI
+- DI with Dagger Hilt
+- Coroutines
+- WorkManager
+- Notifications
+- Retrofit
+- BottomAppBar, Drawer and Scaffold
+- CameraX
